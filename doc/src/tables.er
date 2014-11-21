@@ -1,0 +1,112 @@
+title {label: "Pukapuka's basic tables and relations diagram", size: "24"}
+
+# User Datas
+
+[UserBases]
+*id
+password
++role_type_id
+created_at
+modified_at
+deleted_at
+
+[UserProfile]
+*id
+name
+age
+sex
+introduction
++user_basis_id
+created_at
+modified_at
+deleted_at
+
+[Friendships]
+*id
++from_user_basis_id
++to_user_basis_id
+created_at
+modified_at
+deleted_at
+
+[Messages]
+*id
++user_basis_id
++mentions_to {label: "nullable"}
+content
+created_at
+modified_at
+deleted_at
+
+[ReadMarks]
+*id
++user_basis_id
++message_id
+created_at
+modified_at
+deleted_at
+
+[Reports]
+*id
++user_basis_id
++message_id
+created_at
+modified_at
+deleted_at
+
+[UserSettings]
+*id
++user_basis_id
+created_at
+modified_at
+deleted_at
+
+[UserProperty]
+*id
++user_basis_id
+point
+created_at
+modified_at
+deleted_at
+
+[LoginHistories]
+*id
++user_basis_id
+user_agent
+ip_address
+access_timestamp
+created_at
+modified_at
+deleted_at
+
+
+
+# Master tables
+
+[NGWords]
+*id
+word
+created_at
+modified_at
+deleted_at
+
+[RoleTypes]
+*id
+type_name
+is_admin
+is_tester
+
+
+
+# Relations
+UserBases 1--1 UserProfile
+UserBases *--+ Friendships
+UserBases 1--* Messages
+UserBases 1--* ReadMarks
+Messages 1--? ReadMarks
+UserBases 1--* Reports
+Messages 1--* Reports
+UserBases 1--1 UserSettings
+UserBases 1--1 UserProperty
+UserBases 1--* LoginHistories
+
